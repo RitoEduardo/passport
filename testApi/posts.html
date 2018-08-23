@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Listado de Posts </title>
+    <style>
+        input {
+            margin-bottom: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+
+    </ul>
+    <script>
+
+        (function(){
+            'use strict';
+            console.log( localStorage.getItem("token") );
+            if( localStorage.getItem("token") ){
+                fetch("http://localhost:9090/api/posts", {
+                    method : "GET",
+                    headers: { 'Authorization' : 'Bearer '+localStorage.getItem("token")  }
+                })
+                .then( response => {
+                    return response.json()
+                })
+                .then( data => {
+                    let li = "";
+                    data.forEach( (post,index) =>{
+                        li += "<li>" + post.title +"-"+ post.body + "</li>";
+                    })
+                    document.querySelector("ul").innerHTML = li;
+                })
+            }
+            
+        })();
+    </script>
+</body>
+</html>

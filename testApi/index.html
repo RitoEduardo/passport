@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TestApi</title>
+    <style>
+        input {
+            margin-bottom: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST">
+        <input type="email" id="userID" placeholder="eMail" />
+        <input type="password" id="pass" placeholder="Password" />
+        <input type="submit" id="submitBtn" value="Aceptar" />
+    </form>
+
+    <script>
+
+        (function(){
+            'use strict';
+
+            const clientId = "1";
+            const clientSecret = "NCELJaae1dEfSgshMedcbwif8UMAU6uaR5TBxva0";
+            const grantType = "password";
+
+            document.getElementById("submitBtn").addEventListener('click', function(e){
+                debugger;
+                e.preventDefault();
+
+                fetch('http://localhost:9090/oauth/token', {
+                    method : "POST",
+                    body : JSON.stringify({
+                            client_id : 1,
+                            client_secret : "NCELJaae1dEfSgshMedcbwif8UMAU6uaR5TBxva0",
+                            grant_type : grantType,
+                            username: document.getElementById("userID").value,
+                            password: document.getElementById("pass").value
+                        }),
+                    headers : { 'Content-Type' : "application/json" }
+                }).then( response => {
+                    return response.json()
+                }).then( data => {
+                    localStorage.setItem('token', data.access_token )
+                });
+
+            })
+        })();
+    </script>
+</body>
+</html>
