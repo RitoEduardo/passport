@@ -27,5 +27,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         Passport::routes();
+        Passport::tokensCan([
+            'get-posts' => "Get Publications",
+            'get-two-posts' => "Get two publications"
+        ]);
     }
 }
