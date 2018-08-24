@@ -20,3 +20,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('posts',function(){
     return App\Post::all();
 })->middleware("auth:api");
+
+Route::get('clients/posts', function(){
+    return App\Post::all();
+})->middleware("client");
+
+Route::post('clients/posts', function( Request $request ){
+
+    return ["status" => 200 ];
+    dd(  $request->input("title"),  $request->input("body") );
+
+    App\Post::create([
+        'title' => $request->input("title"),
+        'post' => $request->input("body")
+    ]);
+    return ["status" => 200 ];
+})->middleware("client");

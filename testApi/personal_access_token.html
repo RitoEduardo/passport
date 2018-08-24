@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Client credentials</title>
+    <style>
+        input {
+            margin-bottom: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <form method="POST">
+            <input type="submit" id="submitBtn" value="Obtener Recursos" />
+        </form>
+    </div>
+    
+
+    <script>
+
+        (function(){
+            'use strict';
+
+            let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjEwMDUzNzE5NGMzMTA2ZWNhOTM4MzNhYmQ1ZTFmOThmZTgxNDUzNGJkMTcyMDQ1NDA1ZjA5MDliY2U4YTEzNTc4MTQ3Zjg3NGVjMjNkNTI0In0.eyJhdWQiOiIyIiwianRpIjoiMTAwNTM3MTk0YzMxMDZlY2E5MzgzM2FiZDVlMWY5OGZlODE0NTM0YmQxNzIwNDU0MDVmMDkwOWJjZThhMTM1NzgxNDdmODc0ZWMyM2Q1MjQiLCJpYXQiOjE1MzUxMzIyODMsIm5iZiI6MTUzNTEzMjI4MywiZXhwIjoxNTY2NjY4MjgzLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.hoYR0a5Wdk8ktziHX_Y66B1leZbel926HZ1_rWdhLMA-Qp_DCHmpuVaH5ZQIz_mBjL403rpOuvOfpxdSgQy_kjVxJW5iy6w4RW35XnJXitfdR_bagbRoBx1KWPSrtw7rXctTZBAj9g9e0Bm1FC-yFt7rThhGmL4ySu57lgH2E1Q-oGznGVRigh-Qzuv89RvATDrlYoD_kRJASUICyFylOr-3i9KLV6ySaB1aYcPTPIKnMxGyGhNTmosaM-5j2g0AmdIFfB0r-k7h2djE0tIVaY2EJHbe6Ij6HuAZILZs6kRCT0y_owrarwyU4zeGjVUE41jTTx8AmT9-g37up2PqlNvVPZ6_JopjTIOaodCpXdLzR4DYKkwnOTuCOsiSdW9BRSvpKG_AaDJU8uUrQDHS9roGT_Nf_CXH301uOyjCsJ2MTm11MsaeihX-ilkFV5vloM1tU2WeR3w_y5t9KYZJDmczNDlb9ecgAOWUUxsjfxliYgKWxL8k5a4d2t81Iirz4HEsRFa29lEYARbXlrsytxgVdja-Lg5S46VDV_clR6A3QKH_4A58Pf1OMUf5I3DuEY9nRM4QNGaLkABtbPyyadNg_WMKmYyxL9SxaGqYHRi76kLEgvqTrqRFyKR_v9jvQu-lKbymtph_N5E-3Jwk0Nz8aufWMLERCen0h0cWnVk";
+
+            document.getElementById('submitBtn').addEventListener('click', function(e){
+                debugger;
+                e.preventDefault();
+
+                fetch("http://localhost:9090/api/clients/posts", {
+                    method : "GET",
+                    headers: { 
+                        'Authorization' : 'Bearer '+token,
+                        'Content-Type' : "application/json"   
+                    }
+                })
+                .then( response => {
+                    return response.json();
+                })
+                .then( data => {
+                    console.log( data );
+                });
+
+            });
+
+        })();
+    </script>
+</body>
+</html>
